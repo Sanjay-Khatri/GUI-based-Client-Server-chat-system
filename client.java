@@ -124,11 +124,36 @@ public class client extends Thread {
 
 			}
 		});
-
+		
 		this.jf.add(file);
 
 		this.save = new JButton("Save");
 		this.save.setBounds(275, 410, 100, 40);
+		this.save.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+				String data = tt.getText();
+				LocalDateTime d = LocalDateTime.now();
+				
+				String filename = "jMessenger "+d.getDayOfMonth()+"-"+d.getMonthValue()+"-"+d.getYear()+" "+d.getHour()+"-"+d.getMinute()+"-"+d.getSecond()+" "+"BackUp.txt";
+				System.out.println(filename);			
+				
+				
+				File file = new File(filename);				
+				FileOutputStream fout;					
+						
+				try {
+					fout = new FileOutputStream(file);
+					fout.write(data.getBytes());
+					fout.close();
+					
+				} catch (Exception e) {
+					System.out.println("FILE NOT FOUND");
+				}					
+			}
+		});
 
 		this.jf.add(save);
 
